@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 276, y: 192}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 88
+  controlID: 179
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_MinSize: {x: 201, y: 442}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 129
+  controlID: 110
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_MinSize: {x: 709, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 87
+  controlID: 109
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -269,7 +269,7 @@ MonoBehaviour:
   m_MinSize: {x: 232, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 67
+  controlID: 136
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -451,20 +451,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scripts/Managers
   m_ViewMode: 1
   m_StartGridSize: 33
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scripts/Managers
   m_LastFoldersGridSize: 33
   m_LastProjectPath: C:\Users\LeeDeukYu\Desktop\github\Unity_MMORPG\Client
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ea360000
-    m_LastClickedID: 14058
-    m_ExpandedIDs: 00000000c036000000ca9a3b
+    m_SelectedIDs: ee360000
+    m_LastClickedID: 14062
+    m_ExpandedIDs: 00000000c0360000ea36000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -726,7 +726,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: -0.49415153, y: -0.050284803, z: 0.02864522, w: -0.86745495}
     speed: 2
-    m_Value: {x: -0.50350773, y: -0.040925104, z: 0.023886027, w: -0.8626904}
+    m_Value: {x: -0.49414834, y: -0.05028448, z: 0.028645035, w: -0.86744934}
   m_Size:
     m_Target: 10
     speed: 2
@@ -784,7 +784,7 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: f4360000
       m_LastClickedID: 0
       m_ExpandedIDs: 6afbffff
       m_RenameOverlay:
