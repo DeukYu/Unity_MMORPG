@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637903903167260173
-    m_Hash: 3422587729
+      ticks: 637908155485711156
+    m_Hash: 3219218441
   m_LockFileStatus:
     m_FilePath: C:/Users/LeeDeukYu/Desktop/github/Unity_MMORPG/Client/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637903903542421348
-    m_Hash: 1639585236
+      ticks: 637908155485780970
+    m_Hash: 2456209147
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -22,6 +22,57 @@ m_LocalPackages:
 m_ProjectPath: C:/Users/LeeDeukYu/Desktop/github/Unity_MMORPG/Client/Packages
 m_EditorVersion: 2021.3.4f1 (cb45f9cae8b7)
 m_ResolvedPackages:
+- packageId: com.unity.2d.sprite@1.0.0
+  testable: 0
+  isDirectDependency: 1
+  version: 1.0.0
+  source: 2
+  resolvedPath: C:\Users\LeeDeukYu\Desktop\github\Unity_MMORPG\Client\Library\PackageCache\com.unity.2d.sprite@1.0.0
+  assetPath: Packages/com.unity.2d.sprite
+  name: com.unity.2d.sprite
+  displayName: 2D Sprite
+  author:
+    name: 
+    email: 
+    url: 
+  category: 2D
+  type: 
+  description: Use Unity Sprite Editor Window to create and edit Sprite asset properties
+    like pivot, borders and Physics shape
+  status: 4
+  errors: []
+  versions:
+    all:
+    - 1.0.0
+    compatible:
+    - 1.0.0
+    verified: 1.0.0
+  dependencies: []
+  resolvedDependencies: []
+  keywords:
+  - 2d
+  - sprite
+  - sprite editor window
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 0
+  repository:
+    type: 
+    url: 
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 1.0.0
+    nextVersion: 
 - packageId: com.unity.collab-proxy@1.15.17
   testable: 0
   isDirectDependency: 1
