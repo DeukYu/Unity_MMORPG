@@ -26,9 +26,12 @@ public class UI_Inven : UI_Scene
         // 실제 인벤토리 정보 참고
         for(int i=0; i < 8; ++i)
         {
-            GameObject item = Managers.Resource.Instantiate("UI/Scene/UI_Inven_Item");
-            if(item != null)
-                item.transform.SetParent(gridPanel.transform);
+            GameObject item = Managers.UI.MakeSubItem<UI_Inven_Item>(parent : gridPanel.transform).gameObject;
+            if (item != null)
+            {
+                UI_Inven_Item invenItem = item.GetOrAddComponent<UI_Inven_Item>();
+                invenItem.SetInfo($"Sword{i}번");
+            }
         }
     }
 
