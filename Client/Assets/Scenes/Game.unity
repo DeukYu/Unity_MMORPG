@@ -136,8 +136,8 @@ GameObject:
   - component: {fileID: 69423104}
   - component: {fileID: 69423103}
   - component: {fileID: 69423107}
-  - component: {fileID: 69423108}
   - component: {fileID: 69423109}
+  - component: {fileID: 69423110}
   m_Layer: 9
   m_Name: Cube
   m_TagString: Monster
@@ -239,7 +239,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!82 &69423108
+--- !u!114 &69423109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69423102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3a9e69462133d24183a0a64b2f39943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 6ccbc3d284bd849d49fb1f8f94ab2888, type: 3}
+  audioClip2: {fileID: 8300000, guid: d42eccd24e0ee4aef80df9398ec0747c, type: 3}
+--- !u!82 &69423110
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -249,8 +263,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 28411f84ac99843ba9649b2cae8c879e, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -335,20 +349,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &69423109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69423102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3a9e69462133d24183a0a64b2f39943, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioClip: {fileID: 8300000, guid: 6ccbc3d284bd849d49fb1f8f94ab2888, type: 3}
-  audioClip2: {fileID: 8300000, guid: d42eccd24e0ee4aef80df9398ec0747c, type: 3}
 --- !u!1 &113780410 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 864075766384256756, guid: 05262e0ca5dba78468022948bae1f083,
