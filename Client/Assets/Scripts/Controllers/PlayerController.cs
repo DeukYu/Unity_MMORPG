@@ -7,9 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float _speed = 10.0f;
 
-   // bool _moveToDest = false;
     Vector3 _destPos;
-    // Start is called before the first frame update
+
     void Start()
     {
         Managers.Input.MouseAction -= OnMouseClicked;

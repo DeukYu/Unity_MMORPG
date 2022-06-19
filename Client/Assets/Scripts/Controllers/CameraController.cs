@@ -37,4 +37,10 @@ public class CameraController : MonoBehaviour
             
         }
     }
+
+    public void SetQuarterView(Vector3 delta)
+    {
+        _mode = Define.CameraMode.QuarterView;
+        _delta = delta;
+    }
 }

@@ -30,7 +30,6 @@ public class PoolManager
             go.name = Original.name;
             return go.GetOrAddComponent<Poolable>();
         }
-
         public void Push(Poolable poolable)
         {
             if (poolable == null)
@@ -42,7 +41,6 @@ public class PoolManager
 
             _poolStack.Push(poolable);
         }
-
         public Poolable Pop(Transform parent)
         {
             Poolable poolable;
