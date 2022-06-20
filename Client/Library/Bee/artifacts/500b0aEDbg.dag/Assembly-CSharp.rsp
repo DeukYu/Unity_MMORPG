@@ -339,6 +339,8 @@
 -r:"Library/Bee/artifacts/500b0aEDbg.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/Controllers/CameraController.cs"
 "Assets/Scripts/Controllers/PlayerController.cs"
+"Assets/Scripts/Data/Data.Contents.cs"
+"Assets/Scripts/Managers/DataManager.cs"
 "Assets/Scripts/Managers/InputManager.cs"
 "Assets/Scripts/Managers/Managers.cs"
 "Assets/Scripts/Managers/Poolable.cs"
