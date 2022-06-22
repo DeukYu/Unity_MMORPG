@@ -2513,6 +2513,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnityChan
       objectReference: {fileID: 0}
+    - target: {fileID: 5953616990524386198, guid: 05262e0ca5dba78468022948bae1f083,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05262e0ca5dba78468022948bae1f083, type: 3}
 --- !u!1 &397277513 stripped

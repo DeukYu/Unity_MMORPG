@@ -340,6 +340,7 @@
 "Assets/Scripts/Contents/PlayerStat.cs"
 "Assets/Scripts/Contents/Stat.cs"
 "Assets/Scripts/Controllers/CameraController.cs"
+"Assets/Scripts/Controllers/CursorController.cs"
 "Assets/Scripts/Controllers/PlayerController.cs"
 "Assets/Scripts/Data/Data.Contents.cs"
 "Assets/Scripts/Managers/DataManager.cs"
