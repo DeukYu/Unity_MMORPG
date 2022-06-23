@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 72
+  controlID: 133
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 140
+  controlID: 51
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 139
+  controlID: 50
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 166
+  controlID: 21
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -562,9 +562,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 484d0000
-      m_LastClickedID: 19784
-      m_ExpandedIDs: 34fbffff
+      m_SelectedIDs: da0e0000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 48faffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -672,36 +672,36 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Resources/Art/DogKnight/Animations
+    - Assets/Scripts/Contents
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Resources/Art/DogKnight/Animations
+  - Assets/Scripts/Contents
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\LeeDeukYu\Desktop\github\Unity_MMORPG\Client
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: f4570000
-    m_LastClickedID: 22516
-    m_ExpandedIDs: 00000000ce570000d0570000d2570000d4570000d6570000d8570000da570000dc570000de570000e0570000e2570000e4570000e6570000e8570000ea570000f257000018580000389b0000fec4000000ca9a3b
+    m_SelectedIDs: 30610000
+    m_LastClickedID: 24880
+    m_ExpandedIDs: 000000008c5900008e59000090590000925900009459000096590000985900009a5900009c5900009e590000a0590000a4590000a6590000a8590000aa590000ac590000ae590000b059000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Knight
-      m_OriginalName: Knight
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 50818
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 5}
     m_SearchString: 
@@ -715,7 +715,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ce570000d0570000d2570000d4570000d6570000d8570000da570000dc570000de570000e0570000e2570000e4570000e6570000e8570000ea570000
+    m_ExpandedIDs: 000000008c5900008e59000090590000925900009459000096590000985900009a5900009c5900009e590000a0590000a2590000a4590000a6590000a8590000aa590000ac590000ae590000b0590000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -746,15 +746,15 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: ea56000076c600007cc60000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Knight@Attack1
-      m_OriginalName: Knight@Attack1
+      m_Name: UnityChan
+      m_OriginalName: UnityChan
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 50812
+      m_UserData: 21086
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
       m_OriginalEventType: 0
@@ -942,7 +942,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-transform-toolbar
@@ -1090,9 +1090,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 10.869704, y: -9.169131, z: -0.092944585}
+    m_Target: {x: 0.29335487, y: -7.189628, z: 11.744404}
     speed: 2
-    m_Value: {x: 10.869704, y: -9.169131, z: -0.092944585}
+    m_Value: {x: 0.29335487, y: -7.189628, z: 11.744404}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1139,9 +1139,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.2726387, y: 0.63862824, z: -0.25938922, w: 0.6712553}
+    m_Target: {x: -0.29438543, y: -0.0051626824, z: 0.0015949294, w: -0.9557001}
     speed: 2
-    m_Value: {x: 0.27263266, y: 0.63861406, z: -0.25938347, w: 0.6712404}
+    m_Value: {x: -0.2943774, y: -0.0051625413, z: 0.0015948858, w: -0.955674}
   m_Size:
     m_Target: 8.496023
     speed: 2
