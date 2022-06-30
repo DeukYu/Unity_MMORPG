@@ -1,5 +1,3 @@
 ###### Unity_MMORPG
-##### Game Engine
 <img src="https://img.shields.io/badge/Unity-FFFFFF?style=flat-square&logo=Unity&logoColor=black"/>
-##### Language
-<img src="https://img.shields.io/badge/C%23-000000?style=flat-square&logo=Csharp&logoColor=blue"/>
+<img src="https://img.shields.io/badge/C%23-000000?style=flat-square&logo=Csharp&logoColor=white"/>
