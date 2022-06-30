@@ -338,6 +338,7 @@
 -r:"Library/Bee/artifacts/500b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/500b0aEDbg.dag/UnityEngine.UI.ref.dll"
 "Assets/Scripts/Contents/PlayerStat.cs"
+"Assets/Scripts/Contents/SpawningPool.cs"
 "Assets/Scripts/Contents/Stat.cs"
 "Assets/Scripts/Controllers/BaseController.cs"
 "Assets/Scripts/Controllers/CameraController.cs"
