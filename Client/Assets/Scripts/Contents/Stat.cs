@@ -41,12 +41,17 @@ public class Stat : MonoBehaviour
         if (Hp <= 0)
         {
             Hp = 0;
-            OnDead();
+            OnDead(attacker);
         }
     }
 
-    protected virtual void OnDead()
+    protected virtual void OnDead(Stat attacker)
     {
+        PlayerStat playerStat = attacker as PlayerStat;
+        if (playerStat != null)
+        {
+            playerStat.Exp += 15;
+        }
         Managers.Game.Despawn(gameObject);
     }
 }
