@@ -1,9 +1,13 @@
 # :pushpin: Unity_MMORPG
-> 간단한 MMORPG / Simple MMORPG   
+> 유니티로 만드는 간단한 MMORPG ( Simple MMORPG made by Unity )
+
+</br>
 
 ## 1. 제작 기간 & 참여 인원 / Production Period & The Number of Participants
-- 2022년 5월 
-- 개인 프로젝트   
+- 2022.05.22 ~ Ongoing
+- 개인 프로젝트 / Personal Project
+
+</br>
 
 ## 2. 사용 기술
 **FrontEnd**    
@@ -14,3 +18,5 @@
 **BackEnd**   
 <img src="https://img.shields.io/badge/Visual Studio 2022-5C2D91?style=flat&logo=Visual Studio&logoColor=white"/>   
 <img src="https://img.shields.io/badge/C%23-00599C?style=flat&logo=Csharp&logoColor=white"/>
+
+</br>
