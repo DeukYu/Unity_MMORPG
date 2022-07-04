@@ -3,7 +3,7 @@
 
 </br>
 
-## 제작 기간 & 참여 인원 / Production Period & The Number of Participants
+## 제작 기간 & 참여 인원 ( Production Period & The Number of Participants )
 - 2022.05.22 ~ Ongoing
 - 개인 프로젝트 ( Personal Project )
 
