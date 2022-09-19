@@ -5,16 +5,22 @@ namespace PacketGenerator
 {
     class Program
     {
-        static string GenPackets;
+        static string genPackets;
+        static ushort packetId;
+        static string packetEnums;
         static void Main(string[] args)
         {
+            string pdlPath = "../../PDL.xml";
             XmlReaderSettings settings = new XmlReaderSettings()
             {
                 IgnoreComments = true,  // 주석 무시
                 IgnoreWhitespace = true // 스페이스바 무시
             };
 
-            using (XmlReader reader = XmlReader.Create("PDL.xml", settings))
+            if (args.Length >= 1)
+                pdlPath = args[0];
+
+            using (XmlReader reader = XmlReader.Create(pdlPath, settings))
             {
                 reader.MoveToContent();
 
@@ -24,8 +30,8 @@ namespace PacketGenerator
                         ParsePacket(reader);
                     //Console.WriteLine(reader.Name + " " + reader["name"]);
                 }
-
-                File.WriteAllText("GenPackets.cs", GenPackets);
+                string fileText = string.Format(PacketFormat.fileFormat, packetEnums, genPackets);
+                File.WriteAllText("GenPackets.cs", fileText);
             }
         }
 
@@ -47,8 +53,9 @@ namespace PacketGenerator
             }
 
             Tuple<string, string, string> t = ParseMembers(_reader);
-            GenPackets += string.Format(PacketFormat.packetFormat,
+            genPackets += string.Format(PacketFormat.packetFormat,
                 packetName, t.Item1, t.Item2, t.Item3);
+            packetEnums += string.Format(PacketFormat.packetEnumFormat, packetName, ++packetId) + Environment.NewLine + "\t";
         }
         public static Tuple<string, string, string> ParseMembers(XmlReader _reader)
         {
@@ -81,6 +88,12 @@ namespace PacketGenerator
                 string memberType = _reader.Name.ToLower();
                 switch(memberType)
                 {
+                    case "byte":
+                    case "sbyte":
+                        memberCode += string.Format(PacketFormat.memberFormat, memberType, memberName);
+                        readCode += string.Format(PacketFormat.readByteFormat, memberName, memberType);
+                        writeCode += string.Format(PacketFormat.writeByteFormat, memberName, memberType);
+                        break;
                     case "bool":
                     case "short":
                     case "ushort":

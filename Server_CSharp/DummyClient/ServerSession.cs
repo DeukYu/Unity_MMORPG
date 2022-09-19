@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using ServerCore;
 
 namespace DummyClient
 {
 	class PlayerInfoReq
 	{
+		public byte testByte;
 		public long playerId;
 		public string name;
 
@@ -19,14 +18,41 @@ namespace DummyClient
 			public short level;
 			public float duration;
 
+			public struct Attribute
+			{
+				public int att;
+				public void Read(ReadOnlySpan<byte> s, ref ushort count)
+				{
+					this.att = BitConverter.ToInt32(s.Slice(count, s.Length - count));
+					count += sizeof(int);
+				}
+				public bool Write(Span<byte> s, ref ushort count)
+				{
+					bool bSuccess = true;
+					bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.att);
+					count += sizeof(int);
+					return bSuccess;
+				}
+			}
+			public List<Attribute> attributes = new List<Attribute>();
 			public void Read(ReadOnlySpan<byte> s, ref ushort count)
 			{
 				this.id = BitConverter.ToInt32(s.Slice(count, s.Length - count));
 				count += sizeof(int);
 				this.level = BitConverter.ToInt16(s.Slice(count, s.Length - count));
 				count += sizeof(short);
-				this.duration = BitConverter.ToInt16(s.Slice(count, s.Length - count));
-				count += sizeof(short);
+				this.duration = BitConverter.ToSingle(s.Slice(count, s.Length - count));
+				count += sizeof(float);
+				this.attributes.Clear();
+				ushort attributeLen = BitConverter.ToUInt16(s.Slice(count, s.Length - count));
+				count += sizeof(ushort);
+
+				for (int i = 0; i < attributeLen; ++i)
+				{
+					Attribute attribute = new Attribute();
+					attribute.Read(s, ref count);
+					attributes.Add(attribute);
+				}
 			}
 			public bool Write(Span<byte> s, ref ushort count)
 			{
@@ -36,12 +62,21 @@ namespace DummyClient
 				bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.level);
 				count += sizeof(short);
 				bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.duration);
-				count += sizeof(short);
+				count += sizeof(float);
+				this.attributes.Clear();
+				ushort attributeLen = BitConverter.ToUInt16(s.Slice(count, s.Length - count));
+				count += sizeof(ushort);
+
+				for (int i = 0; i < attributeLen; ++i)
+				{
+					Attribute attribute = new Attribute();
+					attribute.Read(s, ref count);
+					attributes.Add(attribute);
+				}
 				return bSuccess;
 			}
 		}
 		public List<Skill> skills = new List<Skill>();
-
 		public void Read(ArraySegment<byte> segment)
 		{
 			ushort count = 0;
@@ -49,6 +84,8 @@ namespace DummyClient
 			ReadOnlySpan<byte> s = new ReadOnlySpan<byte>(segment.Array, segment.Offset, segment.Count);
 			count += sizeof(ushort);
 			count += sizeof(ushort);
+			this.testByte = (byte)segment.Array[segment.Offset + count];
+			count += sizeof(byte);
 			this.playerId = BitConverter.ToInt64(s.Slice(count, s.Length - count));
 			count += sizeof(long);
 			ushort nameLen = BitConverter.ToUInt16(s.Slice(count, s.Length - count));
@@ -77,6 +114,8 @@ namespace DummyClient
 			count += sizeof(ushort);
 			bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.PlayerInfoReq);
 			count += sizeof(ushort);
+			segment.Array[segment.Offset + count] = (byte)this.testByte;
+			count += sizeof(byte);
 			bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.playerId);
 			count += sizeof(long);
 			ushort nameLen = (ushort)Encoding.Unicode.GetBytes(this.name, 0, this.name.Length, segment.Array, segment.Offset + count + sizeof(ushort));
