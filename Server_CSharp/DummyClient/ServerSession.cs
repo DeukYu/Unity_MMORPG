@@ -6,19 +6,34 @@ using ServerCore;
 
 namespace DummyClient
 {
-	class PlayerInfoReq
+	public enum PacketID
+	{
+		PlayerInfoReq = 1,
+		Test = 2,
+
+	}
+
+	interface IPacket
+	{
+		ushort Protocol { get; }
+		void Read(ArraySegment<byte> segment);
+		ArraySegment<byte> Write();
+	}
+
+
+	class PlayerInfoReq : IPacket
 	{
 		public byte testByte;
 		public long playerId;
 		public string name;
 
-		public struct Skill
+		public class Skill
 		{
 			public int id;
 			public short level;
 			public float duration;
 
-			public struct Attribute
+			public class Attribute
 			{
 				public int att;
 				public void Read(ReadOnlySpan<byte> s, ref ushort count)
@@ -77,6 +92,9 @@ namespace DummyClient
 			}
 		}
 		public List<Skill> skills = new List<Skill>();
+
+		public ushort Protocol { get { return (ushort)PacketID.PlayerInfoReq; } }
+
 		public void Read(ArraySegment<byte> segment)
 		{
 			ushort count = 0;
@@ -138,13 +156,7 @@ namespace DummyClient
 			return SendBufferHelper.Close(count);
 		}
 	}
-
-	public enum PacketID
-    {
-        PlayerInfoReq = 1,
-        PlayerInfoRes = 2,
-    }
-    class ServerSession : Session
+	class ServerSession : Session
     {
         public override void OnConnected(EndPoint endPoint)
         {

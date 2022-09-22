@@ -17,19 +17,34 @@ namespace Server
         public abstract void Read(ArraySegment<byte> s);
     }
 
-	class PlayerInfoReq
+	public enum PacketID
+	{
+		PlayerInfoReq = 1,
+		Test = 2,
+
+	}
+
+	interface IPacket
+	{
+		ushort Protocol { get; }
+		void Read(ArraySegment<byte> segment);
+		ArraySegment<byte> Write();
+	}
+
+
+	class PlayerInfoReq : IPacket
 	{
 		public byte testByte;
 		public long playerId;
 		public string name;
 
-		public struct Skill
+		public class Skill
 		{
 			public int id;
 			public short level;
 			public float duration;
 
-			public struct Attribute
+			public class Attribute
 			{
 				public int att;
 				public void Read(ReadOnlySpan<byte> s, ref ushort count)
@@ -88,6 +103,9 @@ namespace Server
 			}
 		}
 		public List<Skill> skills = new List<Skill>();
+
+		public ushort Protocol { get { return (ushort)PacketID.PlayerInfoReq; } }
+
 		public void Read(ArraySegment<byte> segment)
 		{
 			ushort count = 0;
@@ -149,13 +167,7 @@ namespace Server
 			return SendBufferHelper.Close(count);
 		}
 	}
-
-	public enum PacketID
-    {
-        PlayerInfoReq = 1,
-        PlayerInfoRes = 2,
-    }
-    class ClientSession : PacketSession
+	class ClientSession : PacketSession
     {
         public override void OnConnected(EndPoint endPoint)
         {
@@ -176,28 +188,7 @@ namespace Server
         }
         public override void OnRecvPacket(ArraySegment<byte> buffer)
         {
-            ushort count = 0;
-            ushort size = BitConverter.ToUInt16(buffer.Array, buffer.Offset);
-            count += 2;
-            ushort id = BitConverter.ToUInt16(buffer.Array, buffer.Offset + count);
-            count += 2;
-
-            switch ((PacketID)id)
-            {
-                case PacketID.PlayerInfoReq:
-                    {
-                        PlayerInfoReq p = new PlayerInfoReq();
-                        p.Read(buffer);
-                        Console.WriteLine($"PlayerInfoReq: {p.playerId} {p.name}");
-
-                        foreach(PlayerInfoReq.Skill skill in p.skills)
-                        {
-                            Console.WriteLine($"Skill({skill.id})({skill.level})({skill.duration})");
-                        }
-                    }
-                    break;
-            }
-            Console.WriteLine($"RecvPacketId: {id} Size: {size}");
+			PacketManager.Instance.OnRecvPacket(this, buffer);
         }
         public override void OnDisconnected(EndPoint endPoint)
         {
