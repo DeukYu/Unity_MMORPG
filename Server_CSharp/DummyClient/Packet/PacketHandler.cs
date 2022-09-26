@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 internal class PacketHandler
 {
-    public static void C2S_PlayerInfoReqHandler(PacketSession session, IPacket packet)
+    public static void S2C_PlayerInfoReqHandler(PacketSession session, IPacket packet)
     {
-        C2S_PlayerInfoReqHandler p = packet as C2S_PlayerInfoReqHandler;
+        S2C_PlayerInfoReqHandler p = packet as S2C_PlayerInfoReqHandler;
 
         Console.WriteLine($"PlayerInfoReq: {p.playerId} {p.name}");
 
-        foreach (C2S_PlayerInfoReqHandler.Skill skill in p.skills)
+        foreach (S2C_PlayerInfoReqHandler.Skill skill in p.skills)
         {
             Console.WriteLine($"Skill({skill.id})({skill.level})({skill.duration})");
         }
