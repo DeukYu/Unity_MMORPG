@@ -6,8 +6,8 @@ using ServerCore;
 
 public enum PacketID
 {
-    PlayerInfoReq = 1,
-	Test = 2,
+    C2S_PlayerInfoReq = 1,
+	S2C_Test = 2,
 	
 }
 
@@ -19,7 +19,7 @@ interface IPacket
 }
 
 
-class PlayerInfoReq : IPacket
+class C2S_PlayerInfoReq : IPacket
 {
     public byte testByte;
 	public long playerId;
@@ -91,7 +91,7 @@ class PlayerInfoReq : IPacket
 	}
 	public List<Skill> skills = new List<Skill>();
 
-    public ushort Protocol { get { return (ushort)PacketID.PlayerInfoReq; } }
+    public ushort Protocol { get { return (ushort)PacketID.C2S_PlayerInfoReq; } }
 
     public void Read(ArraySegment<byte> segment)
     {
@@ -128,7 +128,7 @@ class PlayerInfoReq : IPacket
         Span<byte> s = new Span<byte>(segment.Array, segment.Offset, segment.Count);
 
         count += sizeof(ushort);
-        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.PlayerInfoReq);
+        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.C2S_PlayerInfoReq);
         count += sizeof(ushort);
         segment.Array[segment.Offset + count] = (byte)this.testByte;
 		count += sizeof(byte);
@@ -155,11 +155,11 @@ class PlayerInfoReq : IPacket
     }
 }
 
-class Test : IPacket
+class S2C_Test : IPacket
 {
     public int testInt;
 
-    public ushort Protocol { get { return (ushort)PacketID.Test; } }
+    public ushort Protocol { get { return (ushort)PacketID.S2C_Test; } }
 
     public void Read(ArraySegment<byte> segment)
     {
@@ -180,7 +180,7 @@ class Test : IPacket
         Span<byte> s = new Span<byte>(segment.Array, segment.Offset, segment.Count);
 
         count += sizeof(ushort);
-        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.Test);
+        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.S2C_Test);
         count += sizeof(ushort);
         bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.testInt);
 		count += sizeof(int);
