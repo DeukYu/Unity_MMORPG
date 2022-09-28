@@ -1,19 +1,19 @@
-﻿using ServerCore;
+﻿using Server.Session;
+using ServerCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 class PacketHandler
 {
-	public static void C2S_PlayerInfoReqHandler(PacketSession session, IPacket packet)
+	public static void S2C_Chat_ResHandler(PacketSession session, IPacket packet)
 	{
-		C2S_PlayerInfoReq p = packet as C2S_PlayerInfoReq;
+		S2C_Chat_Res? chatPacket = packet as S2C_Chat_Res;
+		ClientSession? clientSession = session as ClientSession;
 
-		Console.WriteLine($"PlayerInfoReq: {p.playerId} {p.name}");
+		if (clientSession.Room == null)
+			return;
 
-		foreach (C2S_PlayerInfoReq.Skill skill in p.skills)
-		{
-			Console.WriteLine($"Skill({skill.id})({skill.level})({skill.duration})");
-		}
+		clientSession.Room.Broadcast(clientSession, chatPacket.chat);
 	}
 }

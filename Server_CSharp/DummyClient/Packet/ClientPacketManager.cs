@@ -20,8 +20,8 @@ class PacketManager
     Dictionary<ushort, Action<PacketSession, IPacket>> _handler = new Dictionary<ushort, Action<PacketSession, IPacket>>();
     public void Register()
     {
-        _onRecv.Add((ushort)PacketID.S2C_Test, MakePacket<S2C_Test>);
-        _handler.Add((ushort)PacketID.S2C_Test, PacketHandler.S2C_TestHandler);
+        _onRecv.Add((ushort)PacketID.C2S_Chat_Req, MakePacket<C2S_Chat_Req>);
+        _handler.Add((ushort)PacketID.C2S_Chat_Req, PacketHandler.C2S_Chat_ReqHandler);
 
     }
     public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer)

@@ -6,8 +6,8 @@ using ServerCore;
 
 public enum PacketID
 {
-    C2S_PlayerInfoReq = 1,
-	S2C_Test = 2,
+    C2S_Chat_Req = 1,
+	S2C_Chat_Res = 2,
 	
 }
 
@@ -19,79 +19,13 @@ interface IPacket
 }
 
 
-class C2S_PlayerInfoReq : IPacket
+class C2S_Chat_Req : IPacket
 {
-    public byte testByte;
-	public long playerId;
+    public long playerId;
 	public string name;
-	
-	public class Skill
-	{
-	    public int id;
-		public short level;
-		public float duration;
-		
-		public class Attribute
-		{
-		    public int att;
-		    public void Read(ReadOnlySpan<byte> s, ref ushort count)
-		    {
-		        this.att = BitConverter.ToInt32(s.Slice(count, s.Length - count));
-				count += sizeof(int);
-		    }
-		    public bool Write(Span<byte> s, ref ushort count)
-		    {
-		        bool bSuccess = true;
-		        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.att);
-				count += sizeof(int);
-		        return bSuccess;
-		    }
-		}
-		public List<Attribute> attributes = new List<Attribute>();
-	    public void Read(ReadOnlySpan<byte> s, ref ushort count)
-	    {
-	        this.id = BitConverter.ToInt32(s.Slice(count, s.Length - count));
-			count += sizeof(int);
-			this.level = BitConverter.ToInt16(s.Slice(count, s.Length - count));
-			count += sizeof(short);
-			this.duration = BitConverter.ToSingle(s.Slice(count, s.Length - count));
-			count += sizeof(float);
-			this.attributes.Clear();
-			ushort attributeLen = BitConverter.ToUInt16(s.Slice(count , s.Length - count));
-			count += sizeof(ushort);
-			            
-			for(int i=0;i<attributeLen;++i)
-			{
-			    Attribute attribute = new Attribute();
-			    attribute.Read(s, ref count);
-			    attributes.Add(attribute);
-			}
-	    }
-	    public bool Write(Span<byte> s, ref ushort count)
-	    {
-	        bool bSuccess = true;
-	        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.id);
-			count += sizeof(int);
-			bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.level);
-			count += sizeof(short);
-			bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.duration);
-			count += sizeof(float);
-			this.attributes.Clear();
-			ushort attributeLen = BitConverter.ToUInt16(s.Slice(count , s.Length - count));
-			count += sizeof(ushort);
-			            
-			for(int i=0;i<attributeLen;++i)
-			{
-			    Attribute attribute = new Attribute();
-			    attribute.Read(s, ref count);
-			    attributes.Add(attribute);
-			}
-	        return bSuccess;
-	    }
-	}
-	public List<Skill> skills = new List<Skill>();
+	public string chat;
 
-    public ushort Protocol { get { return (ushort)PacketID.C2S_PlayerInfoReq; } }
+    public ushort Protocol { get { return (ushort)PacketID.C2S_Chat_Req; } }
 
     public void Read(ArraySegment<byte> segment)
     {
@@ -100,24 +34,16 @@ class C2S_PlayerInfoReq : IPacket
         ReadOnlySpan<byte> s = new ReadOnlySpan<byte>(segment.Array, segment.Offset, segment.Count);
         count += sizeof(ushort);
         count += sizeof(ushort);
-        this.testByte = (byte)segment.Array[segment.Offset + count];
-		count += sizeof(byte);
-		this.playerId = BitConverter.ToInt64(s.Slice(count, s.Length - count));
+        this.playerId = BitConverter.ToInt64(s.Slice(count, s.Length - count));
 		count += sizeof(long);
 		ushort nameLen = BitConverter.ToUInt16(s.Slice(count, s.Length - count));
 		count += sizeof(ushort);
 		this.name = Encoding.Unicode.GetString(s.Slice(count, nameLen));
 		count += nameLen;
-		this.skills.Clear();
-		ushort skillLen = BitConverter.ToUInt16(s.Slice(count , s.Length - count));
+		ushort chatLen = BitConverter.ToUInt16(s.Slice(count, s.Length - count));
 		count += sizeof(ushort);
-		            
-		for(int i=0;i<skillLen;++i)
-		{
-		    Skill skill = new Skill();
-		    skill.Read(s, ref count);
-		    skills.Add(skill);
-		}
+		this.chat = Encoding.Unicode.GetString(s.Slice(count, chatLen));
+		count += chatLen;
     }
     public ArraySegment<byte> Write()
     {
@@ -128,26 +54,18 @@ class C2S_PlayerInfoReq : IPacket
         Span<byte> s = new Span<byte>(segment.Array, segment.Offset, segment.Count);
 
         count += sizeof(ushort);
-        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.C2S_PlayerInfoReq);
+        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.C2S_Chat_Req);
         count += sizeof(ushort);
-        segment.Array[segment.Offset + count] = (byte)this.testByte;
-		count += sizeof(byte);
-		bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.playerId);
+        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.playerId);
 		count += sizeof(long);
 		ushort nameLen = (ushort)Encoding.Unicode.GetBytes(this.name, 0, this.name.Length, segment.Array, segment.Offset + count + sizeof(ushort));
 		bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), nameLen);
 		count += sizeof(ushort);
 		count += nameLen;
-		this.skills.Clear();
-		ushort skillLen = BitConverter.ToUInt16(s.Slice(count , s.Length - count));
+		ushort chatLen = (ushort)Encoding.Unicode.GetBytes(this.name, 0, this.chat.Length, segment.Array, segment.Offset + count + sizeof(ushort));
+		bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), chatLen);
 		count += sizeof(ushort);
-		            
-		for(int i=0;i<skillLen;++i)
-		{
-		    Skill skill = new Skill();
-		    skill.Read(s, ref count);
-		    skills.Add(skill);
-		}
+		count += chatLen;
         bSuccess &= BitConverter.TryWriteBytes(s, count);
         if (bSuccess == false)
             return null;
@@ -155,11 +73,13 @@ class C2S_PlayerInfoReq : IPacket
     }
 }
 
-class S2C_Test : IPacket
+class S2C_Chat_Res : IPacket
 {
-    public int testInt;
+    public long playerId;
+	public string name;
+	public string chat;
 
-    public ushort Protocol { get { return (ushort)PacketID.S2C_Test; } }
+    public ushort Protocol { get { return (ushort)PacketID.S2C_Chat_Res; } }
 
     public void Read(ArraySegment<byte> segment)
     {
@@ -168,8 +88,16 @@ class S2C_Test : IPacket
         ReadOnlySpan<byte> s = new ReadOnlySpan<byte>(segment.Array, segment.Offset, segment.Count);
         count += sizeof(ushort);
         count += sizeof(ushort);
-        this.testInt = BitConverter.ToInt32(s.Slice(count, s.Length - count));
-		count += sizeof(int);
+        this.playerId = BitConverter.ToInt64(s.Slice(count, s.Length - count));
+		count += sizeof(long);
+		ushort nameLen = BitConverter.ToUInt16(s.Slice(count, s.Length - count));
+		count += sizeof(ushort);
+		this.name = Encoding.Unicode.GetString(s.Slice(count, nameLen));
+		count += nameLen;
+		ushort chatLen = BitConverter.ToUInt16(s.Slice(count, s.Length - count));
+		count += sizeof(ushort);
+		this.chat = Encoding.Unicode.GetString(s.Slice(count, chatLen));
+		count += chatLen;
     }
     public ArraySegment<byte> Write()
     {
@@ -180,10 +108,18 @@ class S2C_Test : IPacket
         Span<byte> s = new Span<byte>(segment.Array, segment.Offset, segment.Count);
 
         count += sizeof(ushort);
-        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.S2C_Test);
+        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), (ushort)PacketID.S2C_Chat_Res);
         count += sizeof(ushort);
-        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.testInt);
-		count += sizeof(int);
+        bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), this.playerId);
+		count += sizeof(long);
+		ushort nameLen = (ushort)Encoding.Unicode.GetBytes(this.name, 0, this.name.Length, segment.Array, segment.Offset + count + sizeof(ushort));
+		bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), nameLen);
+		count += sizeof(ushort);
+		count += nameLen;
+		ushort chatLen = (ushort)Encoding.Unicode.GetBytes(this.name, 0, this.chat.Length, segment.Array, segment.Offset + count + sizeof(ushort));
+		bSuccess &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), chatLen);
+		count += sizeof(ushort);
+		count += chatLen;
         bSuccess &= BitConverter.TryWriteBytes(s, count);
         if (bSuccess == false)
             return null;
