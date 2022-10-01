@@ -14,8 +14,10 @@ namespace ServerCore
         {
             if(CurrentBuffer.Value == null)
                 CurrentBuffer.Value = new SendBuffer(ChunkSize);
+
             if (CurrentBuffer.Value.FreeSize < reserveSize)
                 CurrentBuffer.Value = new SendBuffer(ChunkSize);
+
             return CurrentBuffer.Value.Open(reserveSize);
         }
         public static ArraySegment<byte> Close(int usedSize)

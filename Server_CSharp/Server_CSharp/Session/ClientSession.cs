@@ -175,7 +175,7 @@ namespace Server.Session
         {
             Console.WriteLine($"OnConnected : {endPoint}");
 
-            Program.Room.Enter(this);
+            Program.Room.Push(() => Program.Room.Enter(this));
         }
         public override void OnRecvPacket(ArraySegment<byte> buffer)
         {
@@ -186,14 +186,15 @@ namespace Server.Session
             SessionManager.Instance.Remove(this);
             if(Room != null)
             {
-                Room.Leave(this);
+                GameRoom room = Room;
+                room.Push(() => room.Leave(this));
                 Room = null;
             }
             Console.WriteLine($"OnDisconnected : {endPoint}");
         }
         public override void OnSend(int numOfBytes)
         {
-            Console.WriteLine($"Transferred byte : {numOfBytes}");
+            //Console.WriteLine($"Transferred byte : {numOfBytes}");
         }
     }
 }

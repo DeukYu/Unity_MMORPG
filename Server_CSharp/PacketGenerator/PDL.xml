@@ -2,12 +2,10 @@
 <PDL>
   <packet name="C2S_Chat_Req">
     <long name="playerId" />
-    <string name="name"/>
     <string name="chat"/>
   </packet>
   <packet name="S2C_Chat_Res">
     <long name="playerId" />
-    <string name="name"/>
     <string name="chat"/>
   </packet>
 </PDL>
