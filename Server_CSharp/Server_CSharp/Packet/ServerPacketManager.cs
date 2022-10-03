@@ -2,7 +2,7 @@ using ServerCore;
 using System;
 using System.Collections.Generic;
 
-class PacketManager
+public class PacketManager
 {
     #region Singleton
     static PacketManager _instance = new PacketManager();
@@ -16,8 +16,10 @@ class PacketManager
     Dictionary<ushort, Action<PacketSession, IPacket>> _handler = new Dictionary<ushort, Action<PacketSession, IPacket>>();
     public void Register()
     {
-        _makeFunc.Add((ushort)PacketID.C2S_Chat_Req, MakePacket<C2S_Chat_Req>);
-        _handler.Add((ushort)PacketID.C2S_Chat_Req, PacketHandler.C2S_Chat_ReqHandler);
+        _makeFunc.Add((ushort)PacketID.C2S_LeaveGame, MakePacket<C2S_LeaveGame>);
+        _handler.Add((ushort)PacketID.C2S_LeaveGame, PacketHandler.C2S_LeaveGameHandler);
+_makeFunc.Add((ushort)PacketID.C2S_Move, MakePacket<C2S_Move>);
+        _handler.Add((ushort)PacketID.C2S_Move, PacketHandler.C2S_MoveHandler);
 
     }
     public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer, Action<PacketSession, IPacket> onRecvCallback = null)

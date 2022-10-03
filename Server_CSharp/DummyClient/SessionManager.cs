@@ -12,17 +12,19 @@ namespace DummyClient
         public static SessionManager Instance { get { return _session; } }
         List<ServerSession> _sessions = new List<ServerSession>();
         object _lock = new object();
+        Random _rand = new Random();
         public void SendForEach()
         {
             lock(_lock)
             {
                 foreach(ServerSession session in _sessions)
                 {
-                    C2S_Chat_Req chatPacket = new C2S_Chat_Req();
-                    chatPacket.chat = $"Hello Server !";
-                    ArraySegment<byte> segment = chatPacket.Write();
+                    C2S_Move pkt = new C2S_Move();
+                    pkt.posX = _rand.Next(-50, 50);
+                    pkt.posY = 0;
+                    pkt.posZ = _rand.Next(-50, 50);
 
-                    session.Send(segment);
+                    session.Send(pkt.Write());
                 }
             }
         }

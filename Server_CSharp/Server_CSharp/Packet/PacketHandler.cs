@@ -7,15 +7,27 @@ using System.Text;
 
 class PacketHandler
 {
-	public static void C2S_Chat_ReqHandler(PacketSession session, IPacket packet)
+	public static void C2S_LeaveGameHandler(PacketSession session, IPacket packet)
 	{
-		C2S_Chat_Req? chatPacket = packet as C2S_Chat_Req;
 		ClientSession? clientSession = session as ClientSession;
 
 		if (clientSession.Room == null)
 			return;
 
 		GameRoom room = clientSession.Room;
-		room.Push(() => room.Broadcast(clientSession, chatPacket.chat));
+		room.Push(() => room.Leave(clientSession));
+	}
+	public static void C2S_MoveHandler(PacketSession session, IPacket packet)
+    {
+		C2S_Move pkt = packet as C2S_Move;
+		ClientSession? clientSession = session as ClientSession;
+
+		if (clientSession.Room == null)
+			return;
+
+        //Console.WriteLine($"{pkt.posX}, {pkt.posY}, {pkt.posZ}");
+
+		GameRoom room = clientSession.Room;
+		room.Push(() => room.Move(clientSession, pkt));
 	}
 }

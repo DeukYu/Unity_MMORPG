@@ -2,7 +2,7 @@ using ServerCore;
 using System;
 using System.Collections.Generic;
 
-class PacketManager
+public class PacketManager
 {
     #region Singleton
     static PacketManager _instance = new PacketManager();
@@ -16,8 +16,14 @@ class PacketManager
     Dictionary<ushort, Action<PacketSession, IPacket>> _handler = new Dictionary<ushort, Action<PacketSession, IPacket>>();
     public void Register()
     {
-        _makeFunc.Add((ushort)PacketID.S2C_Chat_Res, MakePacket<S2C_Chat_Res>);
-        _handler.Add((ushort)PacketID.S2C_Chat_Res, PacketHandler.S2C_Chat_ResHandler);
+        _makeFunc.Add((ushort)PacketID.S2C_BroadcastEnterGame, MakePacket<S2C_BroadcastEnterGame>);
+        _handler.Add((ushort)PacketID.S2C_BroadcastEnterGame, PacketHandler.S2C_BroadcastEnterGameHandler);
+_makeFunc.Add((ushort)PacketID.S2C_BroadcastLeaveGame, MakePacket<S2C_BroadcastLeaveGame>);
+        _handler.Add((ushort)PacketID.S2C_BroadcastLeaveGame, PacketHandler.S2C_BroadcastLeaveGameHandler);
+_makeFunc.Add((ushort)PacketID.S2C_PlayerList, MakePacket<S2C_PlayerList>);
+        _handler.Add((ushort)PacketID.S2C_PlayerList, PacketHandler.S2C_PlayerListHandler);
+_makeFunc.Add((ushort)PacketID.S2C_BroadcastMove, MakePacket<S2C_BroadcastMove>);
+        _handler.Add((ushort)PacketID.S2C_BroadcastMove, PacketHandler.S2C_BroadcastMoveHandler);
 
     }
     public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer, Action<PacketSession, IPacket> onRecvCallback = null)

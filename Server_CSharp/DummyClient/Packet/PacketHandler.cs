@@ -6,12 +6,24 @@ using System.Text;
 
 class PacketHandler
 {
-    public static void S2C_Chat_ResHandler(PacketSession session, IPacket packet)
+    public static void S2C_BroadcastEnterGameHandler(PacketSession session, IPacket packet)
     {
-        S2C_Chat_Res chatPacket = packet as S2C_Chat_Res;
+        S2C_BroadcastEnterGame pkt = new S2C_BroadcastEnterGame();
         ServerSession serverSession = session as ServerSession;
-
-        //if(chatPacket.playerId == 1)
-        //Console.WriteLine(chatPacket.chat);
+    }
+    public static void S2C_BroadcastLeaveGameHandler(PacketSession session, IPacket packet)
+    {
+        S2C_BroadcastLeaveGame pkt = new S2C_BroadcastLeaveGame();
+        ServerSession serverSession = session as ServerSession;
+    }
+    public static void S2C_PlayerListHandler(PacketSession session, IPacket packet)
+    {
+        S2C_PlayerList pkt = new S2C_PlayerList();
+        ServerSession serverSession = session as ServerSession;
+    }
+    public static void S2C_BroadcastMoveHandler(PacketSession session, IPacket packet)
+    {
+        S2C_BroadcastMove pkt = new S2C_BroadcastMove();
+        ServerSession serverSession = session as ServerSession;
     }
 }

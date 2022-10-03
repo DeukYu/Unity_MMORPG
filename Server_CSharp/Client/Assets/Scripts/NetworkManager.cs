@@ -9,6 +9,10 @@ using UnityEngine;
 public class NetworkManager : MonoBehaviour
 {
     ServerSession _session = new ServerSession();
+    public void Send(ArraySegment<byte> sendBuff)
+    {
+        _session.Send(sendBuff);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -20,31 +24,13 @@ public class NetworkManager : MonoBehaviour
 
         Connector connector = new Connector();
         connector.Connect(endPoint, () => { return _session; }, 1);
-
-        StartCoroutine("CoSendPacket");
     }
 
     // Update is called once per frame
     void Update()
     {
-        IPacket packet = PacketQueue.Instance.Pop();
-        if(packet != null)
-        {
+        List<IPacket> list = PacketQueue.Instance.PopAll();
+        foreach(IPacket packet in list)
             PacketManager.Instance.HandlePacket(_session, packet);
-        }
-    }
-
-    IEnumerator CoSendPacket()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(3.0f);
-
-            C2S_Chat_Req chatPacket = new C2S_Chat_Req();
-            chatPacket.chat = "Hello Unity !";
-            ArraySegment<byte> segment = chatPacket.Write();
-
-            _session.Send(segment);
-        }
     }
 }

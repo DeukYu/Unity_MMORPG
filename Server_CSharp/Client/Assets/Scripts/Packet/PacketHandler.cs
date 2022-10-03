@@ -7,20 +7,30 @@ using UnityEngine;
 
 class PacketHandler
 {
-    public static void S2C_Chat_ResHandler(PacketSession session, IPacket packet)
+    public static void S2C_BroadcastEnterGameHandler(PacketSession session, IPacket packet)
     {
-        S2C_Chat_Res chatPacket = packet as S2C_Chat_Res;
+        S2C_BroadcastEnterGame pkt = new S2C_BroadcastEnterGame();
         ServerSession serverSession = session as ServerSession;
 
-        //if(chatPacket.playerId == 1)
-        {
-            Debug.Log(chatPacket.chat);
+        PlayerManager.Instance.EnterGame(pkt);
+    }
+    public static void S2C_BroadcastLeaveGameHandler(PacketSession session, IPacket packet)
+    {
+        S2C_BroadcastLeaveGame pkt = new S2C_BroadcastLeaveGame();
+        ServerSession serverSession = session as ServerSession;
+        PlayerManager.Instance.LeaveGame(pkt);
+    }
+    public static void S2C_PlayerListHandler(PacketSession session, IPacket packet)
+    {
+        S2C_PlayerList pkt = new S2C_PlayerList();
+        ServerSession serverSession = session as ServerSession;
 
-            GameObject go = GameObject.Find("Player");
-            if (go == null)
-                Debug.Log("Player not found");
-            else
-                Debug.Log("Player found");
-        }
+        PlayerManager.Instance.Add(pkt);
+    }
+    public static void S2C_BroadcastMoveHandler(PacketSession session, IPacket packet)
+    {
+        S2C_BroadcastMove pkt = new S2C_BroadcastMove();
+        ServerSession serverSession = session as ServerSession;
+        PlayerManager.Instance.Move(pkt);
     }
 }
